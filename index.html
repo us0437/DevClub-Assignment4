@@ -1,12 +1,96 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Covid Charts</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>COVID-19</title>
 </head>
 <body>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
-	<script src="script.js"></script>
-</body>
-</html>
+	<div class="jumbotron pb-4 pt-5">
+		<h1 class="display-4" style="font-family:'Times New Roman', Times, serif ; color: rgb(215, 44, 44);">COVID STATUS</h1>
+		<p class="lead" style="font-family:'Times New Roman', Times, serif">
+			This webpage tells the current situation about COVID-19 pandemic</p>
+			<hr class="mt-4">
+		</div>
+		
+		<canvas class="my-5" id="chart">
+		</canvas>
+		<div class="jumbotron py-3 mb-0">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Serial No.</th>
+						<th scope="col">Area</th>
+						<th scope="col">New Confirmed Cases</th>
+						<th scope="col">Total Confirmed Cases</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="data">
+					</tr>
+					<tr id="data1">
+					</tr>
+					
+			</tbody>
+		</table>
+	</div>
+		
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+		<script>
+			init()
+			   function init(){
+				   var url="https://api.covid19api.com/summary"
+				   var data=""
+				   $.get(url,function(data){
+					   console.log(data)
+					   data=`
+					   <th scope="row">1</th>
+						<td>All World</td>
+						<td>${data.Global.NewConfirmed}</td>
+						<td>${data.Global.TotalConfirmed}</td> 
+					   `
+					   $("#data").html(data)
+	
+				   })
+				   var data1=""
+				   $.get(url,function(data1){
+					   console.log(data1)
+					   data1=`
+					   <th scope="row">2</th>
+						<td>India</td>
+						<td>${data1.Countries[77].NewConfirmed}</td>
+						<td>${data1.Countries[77].TotalConfirmed}</td> 
+					   `
+					   $("#data1").html(data1)
+					})
+	
+		}
+		
+	function refreshData()
+		{
+			clearData()
+			init()
+		}
+	function clearData()
+		{
+			$("#data").empty()
+			$("#data1").empty()
+		}    
+	</script>
+
+		<script src="script.js"></script>
+	</body>
+	</html>
