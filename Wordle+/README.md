@@ -1,3 +1,8 @@
+My screenshot is attached above for query CRANE and SPRAY
+
+
+
+
 # Wordle+
 Check out [Wordle](https://www.nytimes.com/games/wordle/index.html). It is a game where the computer has fixed a 5 letter word, let's call that the `SECRET`, and the user has to guess that word. Let's say the user makes a guess, then the computer gives a feedback for each letter in the guess: 
 * Green if that letter is in the same position in the `SECRET`
